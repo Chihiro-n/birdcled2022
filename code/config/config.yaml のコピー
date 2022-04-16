@@ -1,0 +1,52 @@
+
+train_args:
+    "exp_name" : "roberta_Jigsawrating"   ### "roberta_Jigsawrating" or "roberta_Jigsawclassification" you can train bert from 2017compe if you choose Jigsawclassicition
+    "seed": 42    
+    "epochs": 7    
+    "model_name": "/content/input/roberta-base"    
+    "tokenizer": "/content/input/roberta-base"
+    "train_file_path_rating": "/content/input/jigsaw-toxic-severity-rating/wfold_validation_data.csv"  ## jigsaw-toxic-comment-classification-challenge
+    "train_file_path_classification": "/content/input/jigsaw-toxic-comment-classification-challenge/wfold_train.csv"    ## jigsaw-toxic-comment-classification-challenge
+    "train_root_classification": "/content/input/jigsaw-toxic-comment-classification-challenge"    ## jigsaw-toxic-comment-classification-challenge
+    "checkpoint_directory_path": "../models/roberta-base/checkpoints"    
+    "lightning_defalt_root": "/content/drive/My Drive/python/kaggle/jigsaw_study_lightning/models"    
+    "train_batch_size": 32    
+    "valid_batch_size": 64    
+    "max_length": 128    
+    "learning_rate": 0.0001 #1e-4
+    "scheduler": 'CosineAnnealingLR'    
+    "min_lr": 0.000001 #1e-6
+    "T_max": 500    
+    "weight_decay": 0.000001 #1e-6
+    "n_fold": 5    
+    "n_accumulate": 1    
+    "num_classes": 1    
+    "margin": 0.5    
+    "num_workers": 2    
+    "device": torch.device("cuda" if torch.cuda.is_available() else "cpu")    
+    "infra" : "Kaggle"    
+    "competition" : 'Jigsaw'    
+    "_wandb_kernel" : 'neuracort'    
+    "wandb" : True
+
+# TFidf_Ridge_withoutVal_nofold
+# TFidf_Ridge_withoutVal
+# TFidf_Ridge86_withoutVal
+# _cleaned とかも入れないと。
+ridgeargs:
+    "exp_name" : "0874_Pseudo_mean"  ### 実験によってn_foldも変更すること  
+    "train_file_path_rating": "/content/input/jigsaw-toxic-severity-rating/wfold_validation_data.csv"  ## jigsaw-toxic-comment-classification-challenge
+    "train_file_path_classification": "/content/input/jigsaw-toxic-comment-classification-challenge/wfold_train.csv"    ## jigsaw-toxic-comment-classification-challenge
+    "train_root_rating": "/content/input/jigsaw-toxic-severity-rating" 
+    "alpha": 1
+    "min_df" : 3
+    "max_df" : 0.5
+    "n_fold": 0
+
+lightgbm:
+    "exp_name" : "TFidf_LightGBMmulticlass_withoutVal"
+    "device" : "gpu"
+    "min_df" : 3
+    "max_df" : 0.5
+    "n_fold": 5    
+    "num_class": 7  ### 回帰でなくてclass分類タスクにしてみる。    
